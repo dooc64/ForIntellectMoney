@@ -11,7 +11,7 @@ namespace TestForIntellectMoney
         // Потому что словарь хорошо подходит для перевода цифр в слова, думал также о енаме.
         private Dictionary<int, string> _one = new Dictionary<int, string>()
         {
-            {0, "zero " },
+            {0, "" },
             {1, "one " },
             {2, "two " },
             {3, "three " },
@@ -24,6 +24,7 @@ namespace TestForIntellectMoney
         };
         private Dictionary<int, string> _tens = new Dictionary<int, string>()
         {
+            {0, "" },
             {1, "eleven, " },
             {2, "twelve, " },
             {3, "thirteen, " },
@@ -36,6 +37,7 @@ namespace TestForIntellectMoney
         };
         private Dictionary<int, string> _dozens = new Dictionary<int, string>()
         {
+            {0, "" },
             {1, "ten " },
             {2, "twenty " },
             {3, "thirty " },
@@ -48,6 +50,7 @@ namespace TestForIntellectMoney
         };
         private Dictionary<int, string> _hundred = new Dictionary<int, string>()
         {
+            {0, "hundred and " },
             {1, "one hundred and " },
             {2, "two hundred and " },
             {3, "three hundred and " },
@@ -60,6 +63,7 @@ namespace TestForIntellectMoney
         };
         private Dictionary<int, string> _thousand = new Dictionary<int, string>()
         {
+            {0, "thousand" },
             {1, "one thousand, " },
             {2, "two thousand, " },
             {3, "three thousand, " },
@@ -72,6 +76,7 @@ namespace TestForIntellectMoney
         };
         private Dictionary<int, string> _million = new Dictionary<int, string>()
         {
+            {0, "million, " },
             {1, "one million, " },
             {2, "two million, " },
             {3, "three million, " },
@@ -179,6 +184,11 @@ namespace TestForIntellectMoney
                         {
                             case 2:
                                 result.Append(_hundred[int.Parse(listOfNumbers[i][y].ToString())]);
+                                if (int.Parse(listOfNumbers[i][y - 1]) == 0 && int.Parse(listOfNumbers[i][y - 2]) == 0)
+                                {
+                                    result.Remove(result.ToString().LastIndexOf("and "), 4);
+                                    break;
+                                }
                                 break;
                             case 1:
                                 if (int.Parse(listOfNumbers[i][y]) == 1 && int.Parse(listOfNumbers[i][y - 1]) != 0)
